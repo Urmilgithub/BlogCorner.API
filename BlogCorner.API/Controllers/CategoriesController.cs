@@ -27,6 +27,8 @@ namespace BlogCorner.API.Controllers
                 UrlHandle = addCategoryDTO.UrlHandle,
             };
 
+            await categoryRepository.AddCategoryAsync(category);
+
             var addcategory = new CategoryDTO
             {
                 Id = category.Id,
