@@ -1,6 +1,7 @@
 ﻿using BlogCorner.API.Data;
 using BlogCorner.API.Models.Domain;
 using BlogCorner.API.Models.DTO;
+using BlogCorner.API.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +11,11 @@ namespace BlogCorner.API.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ICategoryRepository categoryRepository;
 
-        public CategoriesController(ApplicationDbContext _dbContext)
+        public CategoriesController(ICategoryRepository _categoryRepository)
         {
-            dbContext = _dbContext;
+            categoryRepository = _categoryRepository;
         }
 
         [HttpPost]
@@ -25,9 +26,6 @@ namespace BlogCorner.API.Controllers
                 Name = addCategoryDTO.Name,
                 UrlHandle = addCategoryDTO.UrlHandle,
             };
-
-            await dbContext.Categories.AddAsync(category);
-            await dbContext.SaveChangesAsync();
 
             var addcategory = new CategoryDTO
             {
