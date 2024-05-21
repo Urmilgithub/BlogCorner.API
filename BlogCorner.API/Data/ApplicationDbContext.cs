@@ -11,6 +11,6 @@ namespace BlogCorner.API.Data
         }
 
         public DbSet<BlogPost> BlogPosts {  get; set; }
-        public DbSet<Category> categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
