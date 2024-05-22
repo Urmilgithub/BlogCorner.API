@@ -5,5 +5,6 @@ namespace BlogCorner.API.Repository
     public interface ICategoryRepository
     {
         Task<Category> AddCategoryAsync(Category category);
+        Task<IEnumerable<Category>> GetAllCategoryList();
     }
 }
