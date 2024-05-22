@@ -8,6 +8,7 @@ namespace BlogCorner.API.Repository
         Task<Category> AddCategoryAsync(Category category);
         Task<IEnumerable<Category>> GetAllCategoryList();
         Task<Category?> GetCategoryByIdAsync(Guid id);
+        Task<Category?> UpdateCategoryByIdAsync(Guid id, Category category);
 
 
     }
