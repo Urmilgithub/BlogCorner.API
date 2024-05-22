@@ -18,6 +18,24 @@ namespace BlogCorner.API.Controllers
             categoryRepository = _categoryRepository;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetCategoryList()
+        {
+            var categories = await categoryRepository.GetAllCategoryList();
+
+            var response = new List<CategoryDTO>();
+            foreach (var category in categories)
+            {
+                response.Add(new CategoryDTO
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle,
+                });
+            }
+            return Ok(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddCategory(AddCategoryDTO addCategoryDTO)
         {
