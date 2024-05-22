@@ -26,5 +26,10 @@ namespace BlogCorner.API.Service
         {
             return await dbContext.Categories.ToListAsync();
         }
+
+        public async Task<Category?> GetCategoryByIdAsync(Guid id)
+        {
+            return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id );
+        }
     }
 }
