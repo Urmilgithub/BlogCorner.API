@@ -1,6 +1,7 @@
 ﻿using BlogCorner.API.Data;
 using BlogCorner.API.Models.Domain;
 using BlogCorner.API.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogCorner.API.Service
 {
@@ -19,6 +20,11 @@ namespace BlogCorner.API.Service
             await dbContext.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetAllCategoryList()
+        {
+            return await dbContext.Categories.ToListAsync();
         }
     }
 }
