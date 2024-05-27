@@ -10,6 +10,5 @@ namespace BlogCorner.API.Repository
         Task<Category?> GetCategoryByIdAsync(Guid id);
         Task<Category?> UpdateCategoryByIdAsync(Guid id, Category category);
 
-
     }
 }

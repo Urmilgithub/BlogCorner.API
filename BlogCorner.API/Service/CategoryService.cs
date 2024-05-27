@@ -32,5 +32,18 @@ namespace BlogCorner.API.Service
             return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id );
         }
 
+        public async Task<Category?> UpdateCategoryByIdAsync(Guid id, Category category)
+        {
+            var categories = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            if (categories == null)
+            {
+                return null;
+            }
+
+            dbContext.Entry(categories).CurrentValues.SetValues(categories);
+
+            await dbContext.SaveChangesAsync();
+            return categories;
+        }
     }
 }
