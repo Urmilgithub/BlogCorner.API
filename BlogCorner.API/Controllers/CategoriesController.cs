@@ -18,7 +18,7 @@ namespace BlogCorner.API.Controllers
             categoryRepository = _categoryRepository;
         }
 
-        [HttpGet]
+        [HttpGet("GetCategoryList")]
         public async Task<IActionResult> GetCategoryList()
         {
             var categories = await categoryRepository.GetAllCategoryList();
@@ -55,7 +55,7 @@ namespace BlogCorner.API.Controllers
             return Ok(category);
         }
 
-        [HttpPost]
+        [HttpPost("AddCategory")]
         public async Task<IActionResult> AddCategory(AddCategoryDTO addCategoryDTO)
         {
             var category = new Category
