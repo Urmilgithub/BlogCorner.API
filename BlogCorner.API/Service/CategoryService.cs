@@ -1,6 +1,7 @@
 ﻿using BlogCorner.API.Data;
 using BlogCorner.API.Models.Domain;
 using BlogCorner.API.Repository;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogCorner.API.Service
@@ -20,6 +21,20 @@ namespace BlogCorner.API.Service
             await dbContext.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<Category?> DeleteCategoryByIdAsync(Guid id)
+        {
+            var categoryDomain = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            if (categoryDomain == null)
+            {
+                return null;
+            }
+
+            dbContext.Categories.Remove(categoryDomain);
+            await dbContext.SaveChangesAsync();
+
+            return categoryDomain;
         }
 
         public async Task<IEnumerable<Category>> GetAllCategoryList()

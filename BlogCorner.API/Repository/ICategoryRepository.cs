@@ -9,6 +9,8 @@ namespace BlogCorner.API.Repository
         Task<IEnumerable<Category>> GetAllCategoryList();
         Task<Category?> GetCategoryByIdAsync(Guid id);
         Task<Category?> UpdateCategoryByIdAsync(Guid id, Category category);
+        Task<Category?> DeleteCategoryByIdAsync(Guid id);
+
 
     }
 }

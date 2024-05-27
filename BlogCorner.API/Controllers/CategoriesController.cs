@@ -101,5 +101,25 @@ namespace BlogCorner.API.Controllers
 
             return Ok(updatecategory);
         }
+
+        [HttpDelete("DeleteCategory")]
+        public async Task<IActionResult> DeleteCategory(Guid id)
+        {
+            var categoryDomain = await categoryRepository.DeleteCategoryByIdAsync(id);
+            if(categoryDomain == null)
+            {
+                return NotFound();
+            }
+
+            var deletecategory = new CategoryDTO
+            {
+                Id = categoryDomain.Id,
+                Name = categoryDomain.Name,
+                UrlHandle = categoryDomain.UrlHandle,
+            };
+
+            return Ok(deletecategory);
+        }
+
     }
 }
