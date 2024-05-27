@@ -40,7 +40,7 @@ namespace BlogCorner.API.Service
                 return null;
             }
 
-            dbContext.Entry(categories).CurrentValues.SetValues(categories);
+            dbContext.Entry(categories).CurrentValues.SetValues(category);
 
             await dbContext.SaveChangesAsync();
             return categories;
