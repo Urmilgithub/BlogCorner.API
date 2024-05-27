@@ -75,5 +75,31 @@ namespace BlogCorner.API.Controllers
 
             return Ok(category);
         }
+
+        [HttpPut("UpdateCategoryById")]
+        public async Task<IActionResult> UpdateCategory(Guid id , UpdateCategoryDTO updateCategoryDTO)
+        {
+            var category = new Category
+            {
+                Id = id,
+                Name = updateCategoryDTO.Name,
+                UrlHandle = updateCategoryDTO.UrlHandle,
+            };
+
+            category = await categoryRepository.UpdateCategoryByIdAsync(id, category);
+            if(category == null)
+            {
+                return NotFound();
+            }
+
+            var updatecategory = new CategoryDTO
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle,
+            };
+
+            return Ok(updatecategory);
+        }
     }
 }
