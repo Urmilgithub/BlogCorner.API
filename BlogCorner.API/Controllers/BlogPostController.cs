@@ -100,18 +100,68 @@ namespace BlogCorner.API.Controllers
             return Ok(blogpost);
         }
 
+        [HttpPut("UpdateBlogPost")]
+        public async Task<IActionResult> UpdateBlogpostAsync(Guid id, UpdateBlogPostDTO updateBlogPostDTO)
+        {
+            var blogpost = new BlogPost
+            {
+                Id = id,
+                Title = updateBlogPostDTO.Title,
+                ShortDescription = updateBlogPostDTO.ShortDescription,
+                Content = updateBlogPostDTO.Content,
+                FeaturedImageUrl = updateBlogPostDTO.FeaturedImageUrl,
+                UrlHandle = updateBlogPostDTO.UrlHandle,
+                PublishedDate = updateBlogPostDTO.PublishedDate,
+                Author = updateBlogPostDTO.Author,
+                IsVisible = updateBlogPostDTO.IsVisible,
+            };
 
-        //public async Task<IActionResult> UpdateBlogpostAsync(Guid id,  BlogPost blogpost)
-        //{
-        //    var blogpost = await blogPostRepository.UpdateBlogByIdAsync(id, b);
-        //    if (blogpost == null)
-        //    {
-        //        return NotFound();
-        //    }
+            await blogPostRepository.UpdateBlogByIdAsync(id, blogpost);
 
-        //    var response = new BlogPostDTO
-        //    {
+            if (blogpost == null)
+            {
+                return NotFound();
+            }
 
-        //    }
+            var response = new BlogPostDTO
+            {
+                Id = blogpost.Id,
+                Title = blogpost.Title,
+                ShortDescription = blogpost.ShortDescription,
+                Content = blogpost.Content,
+                FeaturedImageUrl = blogpost.FeaturedImageUrl,
+                UrlHandle = blogpost.UrlHandle,
+                PublishedDate = blogpost.PublishedDate,
+                Author = blogpost.Author,
+                IsVisible = blogpost.IsVisible,
+            };
+
+            return Ok(response);
+        }
+
+        [HttpDelete("DeleteBlogPost")]
+        public async Task<IActionResult> DeleteBlogPost(Guid id)
+        {
+            var blogpost = await blogPostRepository.DeleteBlogByIdAsync(id);
+            if (blogpost == null)
+            {
+                return NotFound();
+            }
+
+            var reponse = new BlogPostDTO
+            {
+                Id = blogpost.Id,
+                Title = blogpost.Title,
+                ShortDescription = blogpost.ShortDescription,
+                Content = blogpost.Content,
+                FeaturedImageUrl = blogpost.FeaturedImageUrl,
+                UrlHandle = blogpost.UrlHandle,
+                PublishedDate = blogpost.PublishedDate,
+                Author = blogpost.Author,
+                IsVisible = blogpost.IsVisible,
+            };
+
+            return Ok(reponse);
+        }
     }
 }
