@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ICategoryRepository, CategoryService>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostService>();
 
 var app = builder.Build();
 
