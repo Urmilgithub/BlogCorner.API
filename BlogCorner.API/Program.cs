@@ -2,6 +2,7 @@ using BlogCorner.API.Data;
 using BlogCorner.API.Repository;
 using BlogCorner.API.Service;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(Options =>
+{
+    Options.AllowAnyHeader();
+    Options.AllowAnyOrigin();
+    Options.AllowAnyMethod();
+});
 
 app.UseAuthorization();
 
